@@ -7,7 +7,7 @@
 call = ""
 
 # While loop
-while call != "STOP" do
+while call != "STOP" || string != "stop" do
     puts "What are you doing? "
     ans = gets.chomp
     puts "What again are you doing today? "
