@@ -14,7 +14,7 @@ end
 
 class BananaCake < Confection
     def prepare
-        super + "Apply frosting" # Mas mataas ang priority nito
+        super + "Apply frosting" # banana cake subclass
     end
 end
 
@@ -26,4 +26,4 @@ puts cup_cake.prepare
 # BananaCake
 banana_cake = BananaCake.new
 puts
-puts banana_cake.prepare # => Baking! Apply frosting
+puts banana_cake.prepare # => Baking at 350 degrees for 25 minutes. Apply frosting
