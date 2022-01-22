@@ -8,13 +8,14 @@ end
 
 class CupCake < Confection
     def prepare
-        super
+        super + "Apply frosting" # cupcake subclass, 
+        # hehe sorry napagbaliktad ko po last time haha
     end
 end
 
 class BananaCake < Confection
     def prepare
-        super + "Apply frosting" # banana cake subclass
+        super  # banana cake subclass
     end
 end
 
