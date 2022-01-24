@@ -8,3 +8,5 @@ INSERT INTO students(first_name, last_name, age, location) VALUES('Theresa', 'Jo
 INSERT INTO students(first_name, last_name, age, location) VALUES('Issac', 'Gray', 19, 'Laguna')
 INSERT INTO students(first_name, last_name, age, location) VALUES('Zack', 'Matthews', 22, 'Marikina')
 INSERT INTO students(first_name, last_name, age, location) VALUES('Finn', 'Lam', 25, 'Manila')
+
+DELETE FROM students WHERE id in(Select Max(id) from students)

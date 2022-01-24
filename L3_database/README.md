@@ -1,4 +1,4 @@
 # PostgreSQL v10++ : 
 ## There is no auto_increment
 
-![Data Output from pgadmin](https://scontent-xsp1-2.xx.fbcdn.net/v/t1.15752-9/271494081_933204627330142_739093932101235257_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeHnM-IWd05Qx4IjHwdtKN2lWV3WGL0B4ABZXdYYvQHgABb0eQ3XXjjaXQ6hbQQ8lXQJ10J1nz3xCd87VsjQOXJb&_nc_ohc=YqbvSgLg-yYAX8u65-K&_nc_ht=scontent-xsp1-2.xx&oh=03_AVJWtC_FJj7_IZarBzpZlIaESET_krab-HCFGu8RhzpTDQ&oe=62137655)
+![Data Output from pgadmin](https://scontent.fmnl4-6.fna.fbcdn.net/v/t1.15752-9/271444989_640694446979730_2100331048012861321_n.png?_nc_cat=107&ccb=1-5&_nc_sid=ae9488&_nc_eui2=AeGgGX-lC0HWceMy6aQYXTHO72Ti2eqkVDfvZOLZ6qRUN-QQuoKPCWChjqd54xZc1EheGmIi3vFfotNV4EMPPPq4&_nc_ohc=WYNGgHrR8pwAX9W86S0&_nc_ht=scontent.fmnl4-6.fna&oh=03_AVIFRUNYkbtnZtoICZzMq3M4hGRwYrIhGTSzzC0_Jdu-JA&oe=6212D651)
