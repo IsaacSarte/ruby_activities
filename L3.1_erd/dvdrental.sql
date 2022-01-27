@@ -1,7 +1,19 @@
-SELECT * FROM language;
-SELECT * FROM payment;
+--  1. /////////////////////////////////////////////////////////
+
+-- Display the number of unique inventory rented and the total number of inventory rented
+
 SELECT * FROM inventory;
+
+-- It should be 16044 rented in total 
+
 SELECT * FROM rental;
+
+SELECT
+-- i-Distinct lang yung inventory_id para mawala duplications
+COUNT(DISTINCT inventory_id) unique_inventory_rented,
+COUNT(inventory_id) total_inventory_rented
+FROM
+rental r;
 
 --  2. /////////////////////////////////////////////////////////
 
@@ -47,6 +59,7 @@ SELECT * FROM category where name = 'Comedy';
 -- Joing the required columns
 
 SELECT
+-- Concatination of last_name and first_name
 concat(UPPER(a.last_name), ', ', a.first_name) actor_full_name,
 f.title film_tile, c.name category_name
 FROM film f
@@ -54,6 +67,7 @@ LEFT JOIN film_category fc ON fc.film_id = f.film_id
 LEFT JOIN category c ON c.category_id = fc.category_id
 LEFT JOIN film_actor fa ON fa.film_id = fc.film_id
 LEFT JOIN actor a ON a.actor_id = fa.actor_id
+-- id comes from the select above
 WHERE c.category_id = 5 AND a.last_name LIKE 'D%'
 ORDER BY concat(a.last_name,', ', a.first_name);
 
@@ -66,6 +80,8 @@ SELECT * FROM address;
 SELECT * FROM city;
 SELECT * FROM country;
 SELECT * FROM store;
+
+-- Joing the required columns
 
 SELECT
 concat(st.last_name,', ', st.first_name) staff_full_name,
@@ -86,6 +102,8 @@ ORDER BY co.country;
 SELECT * FROM film_category;
 SELECT * FROM store;
 
+-- Joing the required columns
+
 SELECT
 s.store_id, 
 COUNT(f.title) film_count,  c.name category_name
@@ -99,6 +117,7 @@ LEFT JOIN store st ON st.store_id = s.store_id
 GROUP BY s.store_id, c.name
 HAVING COUNT(f.title) = 
 (
+-- Sub Query para mapakita yung each store_id
       SELECT MAX(a.film_count) FROM (
       SELECT
           COUNT(f.title) film_count, s.store_id, c.name
@@ -112,7 +131,9 @@ HAVING COUNT(f.title) =
          GROUP BY s.store_id, c.name
       ) a WHERE a.store_id = 1
 
- ) OR COUNT(f.title) = 
+ ) 
+-- Or gagamitin para yung dalawang store_id mapakita
+OR COUNT(f.title) = 
   (
           SELECT MAX(a.film_count) FROM (
           SELECT
@@ -137,8 +158,23 @@ SELECT * FROM actor;
 SELECT * FROM film_actor;
 SELECT * FROM country;
 SELECT * FROM store;
+SELECT * FROM rental;
 
 SELECT
-FROM
-LEFT JOIN
+co.country,
+concat(UPPER(a.last_name),', ', a.first_name) actor_full_name,
+f.title,
+r.rental_id, r.rental_date
+FROM rental r
+LEFT JOIN customer cu ON cu.customer_id = r.customer_id
+LEFT JOIN payment pa ON pa.customer_id = cu.customer_id
+LEFT JOIN inventory i ON i.inventory_id = r.inventory_id
+LEFT JOIN film f ON f.film_id = i.film_id
+LEFT JOIN film_actor fa ON fa.film_id = f.film_id
+LEFT JOIN actor a ON a.actor_id = fa.actor_id
+LEFT JOIN staff st ON st.staff_id = r.staff_id
+LEFT JOIN address ad ON ad.address_id = st.address_id
+LEFT JOIN city ci ON ci.city_id = ad.city_id
+LEFT JOIN country co ON co.country_id = ci.country_id
+where co.country = 'Canada' and (UPPER(a.last_name) = 'WINSLET' and a.first_name = 'Rip')
 
