@@ -1,1 +1,2 @@
-# Ruby Activities [Avion]
+# Ruby Activities
+# SQL Activities
