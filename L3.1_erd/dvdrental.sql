@@ -154,27 +154,26 @@ ORDER BY s.store_id;
 
 -- Rank the top 5 actors per country (determined by the number rentals) sort by most popular to least popular
 
-SELECT * FROM actor;
-SELECT * FROM film_actor;
-SELECT * FROM country;
-SELECT * FROM store;
-SELECT * FROM rental;
-
 SELECT
-co.country,
-concat(UPPER(a.last_name),', ', a.first_name) actor_full_name,
-f.title,
-r.rental_id, r.rental_date
+a.country, a.actor_full_name, a.actor_rank, a.rental_count 
+FROM (
+SELECT
+co.country country, 
+concat(a.last_name,', ', a.first_name) actor_full_name,  
+COUNT(r.rental_id) rental_count, 
+RANK() OVER ( 
+	PARTITION BY co.country 
+	ORDER BY COUNT(r.rental_id) DESC
+) actor_rank
 FROM rental r
-LEFT JOIN customer cu ON cu.customer_id = r.customer_id
-LEFT JOIN payment pa ON pa.customer_id = cu.customer_id
 LEFT JOIN inventory i ON i.inventory_id = r.inventory_id
 LEFT JOIN film f ON f.film_id = i.film_id
 LEFT JOIN film_actor fa ON fa.film_id = f.film_id
 LEFT JOIN actor a ON a.actor_id = fa.actor_id
-LEFT JOIN staff st ON st.staff_id = r.staff_id
-LEFT JOIN address ad ON ad.address_id = st.address_id
-LEFT JOIN city ci ON ci.city_id = ad.city_id
-LEFT JOIN country co ON co.country_id = ci.country_id
-where co.country = 'Canada' and (UPPER(a.last_name) = 'WINSLET' and a.first_name = 'Rip')
-
+LEFT JOIN staff s ON s.staff_id = r.staff_id
+LEFT JOIN address ad ON ad.address_id = s.address_id
+LEFT JOIN city c ON c.city_id = ad.city_id
+LEFT JOIN country co ON co.country_id = c.country_id
+GROUP BY a.last_name, a.first_name, co.country
+) a
+	WHERE a.actor_rank <= 5
